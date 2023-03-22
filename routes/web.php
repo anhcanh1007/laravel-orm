@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserControllerResource;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,5 +44,20 @@ Route::get('/only', [UserController::class, 'only']);
 Route::get('/toQuery', [UserController::class, 'toQuery']);
 Route::get('/unique', [UserController::class, 'unique']);
 Route::get('/replicate', [UserController::class, 'replicate']);
+
+Route::prefix('/manager')->group(function () {
+    Route::prefix('/users')->group(function () {
+        Route::get('/', [UserControllerResource::class, 'index'])->name('user-list');
+        Route::get('/edit/{id}', [UserControllerResource::class, 'edit'])->name('user-edit');
+        Route::post('/update/{id}', [UserControllerResource::class, 'update'])->name('user-update');
+        Route::get('/clone/{id}', [UserControllerResource::class, 'clone'])->name('user-clone');
+    });
+    Route::prefix('/posts')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('post-list');
+        Route::get('/edit/{id}', [PostController::class, 'edit'])->name('post-edit');
+        Route::post('/update/{id}', [PostController::class, 'update'])->name('post-update');
+        Route::get('/clone/{id}', [PostController::class, 'clone'])->name('post-clone');
+    });
+});
 
 require __DIR__.'/auth.php';
