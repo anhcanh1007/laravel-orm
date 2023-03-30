@@ -15,14 +15,22 @@
             <h4>List Post</h4>
         </div>
         <div class="row">
+            <form class="form-inline mb-3" method="GET">
+                <div class="form-group">
+                    <input type="text" name="key" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <div class="row">
             <table class="table">
                 <thead class="thead-light">
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
                         <th>Content</th>
-                        <th>User</th>
-                        <th colspan="3">Action</th>
+                        <th>User-id</th>
+                        <th colspan="4">Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-striped">
@@ -31,14 +39,18 @@
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->content }}</td>
-                            <td></td>
+                            <td>{{ $post->user_id }}</td>
                             <td><a href="{{ route('post-edit',[$post->id]) }}"><button type="button" class="btn btn-primary">Edit</button></a></td>
                             <td><button type="button" class="btn btn-primary">Delete</button></td>
                             <td><a href="{{ route('post-clone', [$post->id]) }}"><button type="button" class="btn btn-primary">Clone</button></a></td>
+                            <td><a href="{{ route('post-check', [$post->id]) }}"><button type="button" class="btn btn-primary">Check change</button></a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="row">
+                <a href="{{ route('post-update-mass-user') }}"><button type="submit" class="btn btn-primary">Update Mass</button></a>
+            </div>
         </div>
       </div>
     <!-- Optional JavaScript -->

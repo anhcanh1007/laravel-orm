@@ -12,7 +12,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::search()->type(1)->get()->where('user_id', 2);
+        $posts = Post::search()->paginate();
         return view('admin.posts.list', compact('posts'));
     }
 
@@ -46,6 +47,7 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::findOrFail($id);
+
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -56,6 +58,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->update($request->all());
+
         return redirect()->route('post-list');
     }
 
@@ -73,5 +76,21 @@ class PostController extends Controller
         $new_post = $post->replicate();
         $new_post->save();
         return redirect()->route('post-edit',$new_post);
+    }
+
+    public function update_mass ()
+    {
+        $post = Post::where('user_id', 1)->update(['user_id' => 2]);
+        return redirect()->route('post-list')   ;
+    }
+
+    public function check_change ($id)
+    {
+        $post = Post::findOrFail($id);
+        if ($post->wasChanged) {
+            return "Dữ liệu đã được thay đổi";
+        } else {
+            return "Dữ liệu chưa được thay đổi";
+        }
     }
 }

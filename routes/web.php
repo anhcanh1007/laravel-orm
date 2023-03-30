@@ -51,12 +51,15 @@ Route::prefix('/manager')->group(function () {
         Route::get('/edit/{id}', [UserControllerResource::class, 'edit'])->name('user-edit');
         Route::post('/update/{id}', [UserControllerResource::class, 'update'])->name('user-update');
         Route::get('/clone/{id}', [UserControllerResource::class, 'clone'])->name('user-clone');
+        Route::get('/delete/{id}', [UserControllerResource::class, 'delete'])->name('user-delete');
     });
     Route::prefix('/posts')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('post-list');
         Route::get('/edit/{id}', [PostController::class, 'edit'])->name('post-edit');
         Route::post('/update/{id}', [PostController::class, 'update'])->name('post-update');
         Route::get('/clone/{id}', [PostController::class, 'clone'])->name('post-clone');
+        Route::get('/update-mass', [PostController::class, 'update_mass'])->name('post-update-mass-user');
+        Route::get('/check-change/{id}', [PostController::class, 'check_change'])->name('post-check');
     });
 });
 

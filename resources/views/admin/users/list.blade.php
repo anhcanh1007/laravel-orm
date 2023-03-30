@@ -35,12 +35,13 @@
                             <td>{{ $user->created_at }}</td>
                             <td>{{ $user->updated_at }}</td>
                             <td><a href="{{ route('user-edit',[$user->id]) }}"><button type="button" class="btn btn-primary">Edit</button></a></td>
-                            <td><button type="button" class="btn btn-primary">Delete</button></td>
+                            <td><a href="{{ route('user-delete', [$user->id]) }}"><button type="button" class="btn btn-primary">Delete</button></a></td>
                             <td><a href="{{ route('user-clone', [$user->id]) }}"><button type="button" class="btn btn-primary">Clone</button></a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
         </div>
       </div>
     <!-- Optional JavaScript -->

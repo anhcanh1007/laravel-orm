@@ -75,4 +75,11 @@ class UserControllerResource extends Controller
         $new_user->save();
         return redirect()->route('user-edit', $new_user);
     }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('user-list');
+    }
 }

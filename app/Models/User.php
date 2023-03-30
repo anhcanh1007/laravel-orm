@@ -43,8 +43,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    // kiểu quan hệ 1-n (một người dùng có thể viết nhiều bài viết)
     public function posts ()
     {
         return $this->hasMany(Post::class);
+    }
+
+    //kiểu quan hệ 1-1 (một người dùng chỉ có một ảnh đại diện)
+    public function avatar()
+    {
+        return $this->hasOne(Avatar::class, 'user_id', 'id');
     }
 }
