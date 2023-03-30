@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserControllerResource;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +62,13 @@ Route::prefix('/manager')->group(function () {
         Route::get('/update-mass', [PostController::class, 'update_mass'])->name('post-update-mass-user');
         Route::get('/check-change/{id}', [PostController::class, 'check_change'])->name('post-check');
     });
+
+    Route::get('/test', function () {
+        $pro = Product::find(11);
+        dd($pro->product_tag);
+    });
 });
+
+
 
 require __DIR__.'/auth.php';
